@@ -12,7 +12,8 @@ app.listen(PORT, () => {
 });
 
 // TODO - Replace static content with a database tables
-let poolRouter = require('./routes/pool_router');
+let songsRouter = require('./routes/song_router');
+let artistsRouter = require('./routes/artist_router');
 //add router here
-app.use('/artist', poolRouter);
-app.use('/song', poolRouter);
+app.use('/song', songsRouter);
+app.use('/artist', artistsRouter);
