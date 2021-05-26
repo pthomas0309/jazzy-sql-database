@@ -69,7 +69,18 @@ const songList = [
 
 app.get('/artist', (req, res) => {
     console.log(`In /songs GET`);
-    res.send(artistList);
+    // GET from artist database
+    let queryText = `SELECT * FROM "artists";`
+    // send the query to DB
+    // make a promise
+    pool.query(queryText)
+        .then((result) => {
+            console.log(result.rows);
+            res.send(result.rows)
+        }).catch((err) => {
+            console.log(err);
+            res.sendStatus(500);
+        });
 });
 
 app.post('/artist', (req, res) => {
