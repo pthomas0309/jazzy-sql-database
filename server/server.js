@@ -12,6 +12,16 @@ app.listen(PORT, () => {
 });
 
 // TODO - Replace static content with a database tables
+
+//pg config (local only)
+const pg = require('pg');
+const Pool = pg.Pool;
+const pool = new Pool({
+    database: 'jazzy_sql',
+    host: 'localhost',
+    port: '5432'
+});
+
 const artistList = [ 
     {
         name: 'Ella Fitzgerald',
