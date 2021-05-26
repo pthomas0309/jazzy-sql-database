@@ -22,6 +22,15 @@ const pool = new Pool({
     port: '5432'
 });
 
+// log connection
+pool.on('connect', () => {
+    console.log('CONNECTED TO POSTGRES');
+});
+//check for error
+pool.on('error', (error) => {
+    console.log(error);
+});
+
 const artistList = [ 
     {
         name: 'Ella Fitzgerald',
