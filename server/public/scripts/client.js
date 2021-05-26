@@ -68,8 +68,9 @@ function getArtists() {
         method: 'GET',
         url: '/artist'
     }).then(function(response) {
+        console.log(response);
         const listOfArtists = response;
-        renderArtists(response);
+        renderArtists(listOfArtists);
     }).catch(function (error) {
         console.log('error in artist get', error);
     });
@@ -95,8 +96,8 @@ function renderArtists( listOfArtists ) {
     for(let artist of listOfArtists) {
         $('#artistTableBody').append(`
                 <tr>
-                    <td>${artist.name}</td>
-                    <td>${artist.birthdate}</td>
+                    <td>${artist.artist_name}</td>
+                    <td>${artist.year_born}</td>
                 </tr>`
         );
     }
