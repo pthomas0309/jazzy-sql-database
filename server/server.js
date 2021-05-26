@@ -53,7 +53,7 @@ app.post('/artist', (req, res) => {
     //sanitize query
     let queryText = `INSERT INTO "artists" ("artist_name", "year_born")
     VALUES ($1, $2);`
-    console.log(req.body.artist_name);
+    console.log(req.body.artist);
     let values = [req.body.name, req.body.birthdate]
     //send query and an array with untrusted data to prevent injection
     pool.query(queryText, values)
@@ -82,8 +82,20 @@ app.get('/song', (req, res) => {
 });
 
 app.post('/song', (req, res) => {
-    songList.push(req.body);
-    res.sendStatus(201);
+    //songList.push(req.body);
+    //sanitize query
+    let queryText = `INSERT INTO "songs" ("title", "length", "released")
+    VALUES ($1, $2, $3);`
+    console.log(req.body.title);
+    let values = [req.body.title, req.body.length, req.body.released]
+    //send query and an array with untrusted data to prevent injection
+    pool.query(queryText, values)
+    .then((result) => {
+        res.sendStatus(201)
+    }).catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+    });
 });
 
 
