@@ -49,8 +49,20 @@ app.get('/artist', (req, res) => {
 });
 
 app.post('/artist', (req, res) => {
-    artistList.push(req.body);
-    res.sendStatus(201);
+    //artistList.push(req.body);
+    //sanitize query
+    let queryText = `INSERT INTO "artists" ("artist_name", "year_born")
+    VALUES ($1, $2);`
+    console.log(req.body.artist_name);
+    let values = [req.body.name, req.body.birthdate]
+    //send query and an array with untrusted data to prevent injection
+    pool.query(queryText, values)
+    .then((result) => {
+        res.sendStatus(201)
+    }).catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+    });
 });
 
 app.get('/song', (req, res) => {
