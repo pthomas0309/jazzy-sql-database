@@ -35,7 +35,7 @@ pool.on('error', (error) => {
 app.get('/artist', (req, res) => {
     console.log(`In /songs GET`);
     // GET from artist database
-    let queryText = `SELECT * FROM "artists";`
+    let queryText = `SELECT * FROM "artists" ORDER BY "year_born" DESC;`
     // send the query to DB
     // make a promise
     pool.query(queryText)
@@ -56,7 +56,7 @@ app.post('/artist', (req, res) => {
 app.get('/song', (req, res) => {
     console.log(`In /songs GET`);
     // GET from artist database
-    let queryText = `SELECT * FROM "songs";`
+    let queryText = `SELECT * FROM "songs" ORDER BY "title";`
     // send the query to DB
     // make a promise
     pool.query(queryText)
